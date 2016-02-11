@@ -1,0 +1,31 @@
+<div class="panel-heading">Top Sessions {{ (direction == 'out') ? 'outbound' : 'inbound' }}</div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>IP Source</th>
+        <th>IP Destination</th>
+        <th>Port Source</th>
+        <th>Port Destination</th>
+        <th>As {{ direction }}</th>
+        <th>As Name</th>
+        <th>Bits/s</th>
+        <th>Packets/s</th>
+      </tr>
+    </thead>
+    <tbody>
+{% for r in rows %}
+      <tr>
+        <td>{{ loop.index }}</td>
+        <td>{{ r.ip_src }}</td>
+        <td>{{ r.ip_dst }}</td>
+        <td>{{ r.port_src }}</td>
+        <td>{{ r.port_dst }}</td>
+        <td>{{ r.asq }}</td>
+        <td>{{ r.as_name }}</td>
+        <td>{{ r.traffic }} Mb/s</td>
+        <td>{{ r.pps }} packets/s</td>
+      </tr>
+{% endfor %}
+    </tbody>
+  </table>

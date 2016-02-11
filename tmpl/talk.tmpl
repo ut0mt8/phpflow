@@ -1,0 +1,23 @@
+<div class="col-sm-8">
+  <div class="panel-heading">Top IP {{ (direction == 'out') ? 'source' : 'destination'}}</div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>IP {{ (direction == 'out') ? 'source' : 'destination'}}</th>
+        <th>Hostname</th>
+        <th>Bits/s</th>
+      </tr>
+    </thead>
+    <tbody>
+{% for r in rows %}
+      <tr>
+        <td>{{ loop.index }}</td>
+        <td>{{ r.ipa }}</td>
+        <td>{{ r.name }}</td>
+        <td>{{ r.traffic }} Mb/s</td>
+      </tr>
+{% endfor %}
+    </tbody>
+  </table>
+</div>

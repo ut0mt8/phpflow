@@ -1,0 +1,21 @@
+<div class="panel-heading">Top Countries {{ (direction == 'out') ? 'outbound' : 'inbound' }}</div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Country</th>
+        <th>Bits/s</th>
+        <th>Packets/s</th>
+      </tr>
+    </thead>
+    <tbody>
+{% for r in rows %}
+      <tr>
+        <td>{{ loop.index }}</td>
+        <td><img width="30" src="img/flags/{{ r.ctry }}.png"><button type="button" class="btn btn-default btn-xs">{{ r.ctry }}</button></td>
+        <td>{{ r.traffic }} Mb/s</td>
+        <td>{{ r.pps }} packets/s</td>
+      </tr>
+{% endfor %}
+    </tbody>
+  </table>

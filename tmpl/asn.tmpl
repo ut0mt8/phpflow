@@ -1,0 +1,30 @@
+<div class="panel-heading">Top AS {{ (direction == 'out') ? 'outbound' : 'inbound' }}</div>
+<table class="table">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>As</th>
+      <th>As Name</th>
+      <th>Bits/s</th>
+      <th>Packets/s</th>
+    </tr>
+  </thead>
+  <tbody>
+{% for r in rows %}
+    <tr>
+      <td>{{ loop.index }}</td>
+      <td>{{ r.asq }}</td>
+      <td>{{ r.as_name }}</td>
+      <td>{{ r.traffic }} Mb/s</td>
+      <td>{{ r.pps }} packets/s</td>
+    </tr>
+{% endfor %}
+    <tr>
+      <td><a href="{{ r.iface_index }}" class="btn btn-default btn-danger btn-xs">Total</a></td>
+      <td></td>
+      <td></td>
+      <td>{{ total_traffic }} Mb/s</td>
+      <td>{{ total_pps }} packets/s</td>
+    </tr>
+  </tbody>
+</table>
