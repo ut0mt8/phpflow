@@ -15,16 +15,16 @@
       <td>{{ loop.index }}</td>
       <td>{{ r.asq }}</td>
       <td>{{ r.as_name }}</td>
-      <td>{{ r.traffic }} Mb/s</td>
-      <td>{{ r.pps }} packets/s</td>
+      <td>{{ r.traffic }}bit/s</td>
+      <td>{{ r.pps }}pkt/s</td>
     </tr>
 {% endfor %}
     <tr>
       <td><a href="{{ r.iface_index }}" class="btn btn-default btn-danger btn-xs">Total</a></td>
       <td></td>
       <td></td>
-      <td>{{ total_traffic }} Mb/s</td>
-      <td>{{ total_pps }} packets/s</td>
+      <td>{{ total_traffic }}bit/s</td>
+      <td>{{ total_pps }}pkt/s</td>
     </tr>
   </tbody>
 </table>

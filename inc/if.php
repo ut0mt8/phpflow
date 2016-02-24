@@ -3,8 +3,8 @@
 $table = "netflow_if_".$direction;
 
 $sql = "select iface_desc, iface_id, router_desc, ";
-$sql .= "round(sum(bytes)*8*".$sampling_rate."/1000000/".$interval.",1) traffic, ";
-$sql .= "round(sum(packets)*".$sampling_rate."/1000".$interval.",2) pps ";
+$sql .= "sum(bytes)*8*".$sampling_rate."/".$interval." traffic, ";
+$sql .= "sum(packets)*".$sampling_rate."/".$interval." pps ";
 $sql .= "from ".$table.", interface_map ";
 $sql .= "where tag = iface_id ";
 if ($cust != "") $sql .= "and tag2 = ".$cust." ";
@@ -23,16 +23,20 @@ while($row = mysqli_fetch_array($result)) {
   $total_pps += $row['pps'];
 }
 
-/* compute percent use */
+/* compute percent use and clean formating */
 foreach ($rows as $key => $row) {
   $percent = round($row['traffic']/$total_traffic*100);
+  $traffic = formatUnit($row['traffic']);
+  $pps = formatUnit($row['pps']);
   $rows[$key]['percent'] = $percent;
+  $rows[$key]['traffic'] = $traffic;
+  $rows[$key]['pps'] = $pps;
 }
 
 $tpl = $twig->loadTemplate('if.tmpl');
 echo $tpl->render(array(
   'rows' => $rows,
   'direction' => $direction,
-  'total_traffic' => $total_traffic,
-  'total_pps' => $total_pps
+  'total_traffic' => formatUnit($total_traffic),
+  'total_pps' => formatUnit($total_pps)
 ));

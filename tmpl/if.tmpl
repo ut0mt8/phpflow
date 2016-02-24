@@ -14,8 +14,8 @@
       <tr>
         <td><a href="" class="btn btn-default btn-xs">{{ r.router_desc }}</a></td>
         <td><a href="{{ r.if_id }}" class="btn btn-default btn-xs">{{ r.iface_desc }}</a></td>
-        <td>{{ r.traffic }} Mb/s</td>
-        <td>{{ r.pps }} Kpkt/s</td>
+        <td>{{ r.traffic }}bit/s</td>
+        <td>{{ r.pps }}pkt/s</td>
         <td>
           <div class="progress" style="text-align: center;">
 	    <div class="progress-bar" role="progressbar" aria-valuenow="{{ r.percent }}" style="width: {{ r.percent }}%;"></div> {{ r.percent }}%
@@ -26,8 +26,8 @@
       <tr>
         <td><a href="{{ r.iface_index }}" class="btn btn-default btn-danger btn-xs">Total</a></td>
         <td></td>
-        <td>{{ total_traffic }} Mb/s</td>
-        <td>{{ total_pps }} Kpkt/s</td>
+        <td>{{ total_traffic }}bit/s</td>
+        <td>{{ total_pps }}pkt/s</td>
         <td></td>
       </tr>
     </tbody>

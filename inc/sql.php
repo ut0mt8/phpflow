@@ -1,8 +1,8 @@
 <?php
 
 $db_user="pmacct";
-$db_passwd="XXX";
-$db_host="127.0.0.1";
+$db_passwd="Qgg8sZAVmi";
+$db_host="10.3.0.20";
 $db_name="pmacct";
 
 $dbh = mysqli_connect($db_host,$db_user,$db_passwd,$db_name);

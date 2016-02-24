@@ -36,3 +36,10 @@ function make_interval_select($current) {
   }
   return $rows;
 }
+
+function formatUnit($size, $precision = 2) {
+  $base = log($size, 1000);
+  $suffixes = array('', 'K', 'M', 'G', 'T');   
+  return round(pow(1000, $base-floor($base)), $precision).' '.$suffixes[floor($base)];
+}
+

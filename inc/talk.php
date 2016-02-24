@@ -9,7 +9,7 @@ if ($direction == "out") {
 }
 
 $sql = "select ".$ips1." ipa, ";
-$sql .= "round(sum(bytes)*8*".$sampling_rate."/1000000/".$interval.",1) traffic ";
+$sql .= "sum(bytes)*8*".$sampling_rate."/".$interval." traffic ";
 $sql .= "from ".$table." ";
 $sql .= "where stamp_inserted between '".$stamp_min."' and '".$stamp_max."' ";
 if ($cust != "") $sql .= "and tag2 = ".$cust." ";
@@ -22,33 +22,17 @@ while($row = mysqli_fetch_array($result)) {
   array_push($rows,$row);
 }
 
-/* search for reverse */
+/* search for reverse and clean formating */
 foreach ($rows as $key => $row) {
   $hostname = gethostbyaddr($row['ipa']);
+  $traffic = formatUnit($row['traffic']);
   $rows[$key]['name'] = $hostname;
+  $rows[$key]['traffic'] = $traffic;
 }
-
-/*
-$sql = "select ".$ips2." ipa, ".$ctry." ctry, ";
-$sql .= $asq." asq, asn.as_name, ";
-$sql .= "round(sum(bytes)*8*".$sampling_rate."/1000000/".$interval.",1) traffic ";
-$sql .= "from ".$table.", asn ";
-$sql .= "where ".$asq."=as_number ";
-$sql .= "and stamp_updated between '".$stamp_min."' and '".$stamp_max."' ";
-$sql .= "group by ipa order by sum(bytes) desc limit ".$entry_limit;
-
-$result = do_query($sql);
-
-$rows2 = array();
-while($row = mysqli_fetch_array($result)) {
-  array_push($rows2,$row);
-}
-*/
 
 $tpl = $twig->loadTemplate('talk.tmpl');
 echo $tpl->render(array(
   'rows' => $rows,
-//  'rows2' => $rows2,
   'direction' => $direction
 ));
 
