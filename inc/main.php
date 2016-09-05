@@ -1,6 +1,6 @@
 <?php
 
-$rootdir = '/var/www/flow/';
+$rootdir = '/var/www/phpflow/';
 include("$rootdir/inc/sql.php");
 include("$rootdir/inc/func.php");
 
